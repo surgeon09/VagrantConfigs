@@ -34,3 +34,16 @@
 #{ и } являются зарезервированными словами и должны встречаться там, где разрешено распознавание 
 #зарезервированного слова
 #lines 186 (RESERVED WORDS) and 280 (Compound Commands - { list; })
+
+# С учётом ответа на предыдущий вопрос, как создать однократным вызовом touch 100000 файлов? Получится 
+# ли аналогичным образом создать 300000? Если нет, то почему?
+#vagrant@vagrant:~/test$ touch {1..100000}.txt
+#vagrant@vagrant:~/test$ rm {1..100000}.txt
+#vagrant@vagrant:~/test$ touch {1..200000}.txt
+#-bash: /usr/bin/touch: Argument list too long
+#vagrant@vagrant:~/test$ touch {1..300000}.txt
+#-bash: /usr/bin/touch: Argument list too long
+#vagrant@vagrant:~/test$
+#100000 создать дал, а 300000 нет - argument list too long: touch
+###
+
