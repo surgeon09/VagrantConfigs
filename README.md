@@ -51,3 +51,11 @@
 #При использовании с [[ операторы < и > сортируются лексикографически с использованием текущей локали, 
 #т.е. конструкция означает, что в текущей локали -d - Истинно, если файл существует и является каталогом /tmp
 
+# Основываясь на знаниях о просмотре текущих (например, PATH) и установке новых переменных; командах, которые мы рассматривали, добейтесь в выводе type -a bash в виртуальной машине наличия первым пунктом в списке:
+#vagrant@vagrant:~$ mkdir /tmp/new_path_dir/
+#vagrant@vagrant:~$ cp /bin/bash /tmp/new_path_dir/
+#vagrant@vagrant:~$ PATH=/tmp/new_path_dir/:$PATH
+#vagrant@vagrant:~$ type -a bash
+#bash is /tmp/new_path_dir/bash
+#bash is /usr/bin/bash
+#bash is /bin/bash
