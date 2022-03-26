@@ -10,3 +10,10 @@
 #- Контроллер: IDE Controller
 #- Контроллер: SATA Controller
 #- SATA порт 0: ubuntu-20.04-amd64-disk001.vmdk (Обычный, 64,00ГБ)
+
+# Как добавить оперативной памяти или ресурсов процессора виртуальной машине?
+#config.vm.provider "virtualbox" do |v|
+	#v.memory = 4096
+	#v.cpus = 4
+#end
+#vagrant reload
