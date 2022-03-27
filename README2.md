@@ -21,3 +21,14 @@
 #vagrant@vagrant:~$ cat /var/log/syslog | grep -A 2 error - выведет 2 строки после найденного вхождения
 #vagrant@vagrant:~$ cat /var/log/syslog | grep -B 2 error - выведет 2 строки до найденного вхождения
 #vagrant@vagrant:~$ cat /var/log/syslog | grep -С 2 error - выведет 2 строки до и после найденного вхождения
+
+
+# Какой процесс с PID 1 является родителем для всех процессов в вашей виртуальной машине Ubuntu 20.04?
+#systemd(1)─┬─VBoxService(893)─┬─{VBoxService}(895)
+           │                  ├─{VBoxService}(896)
+           │                  ├─{VBoxService}(897)
+           │                  ├─{VBoxService}(898)
+           │                  ├─{VBoxService}(899)
+           │                  ├─{VBoxService}(900)
+           │                  ├─{VBoxService}(901)
+           │                  └─{VBoxService}(902)
