@@ -43,3 +43,18 @@
 #vagrant@vagrant:~$ tty
 #/dev/pts/1
 #vagrant@vagrant:~$ ls: cannot access '14.file': No such file or directory
+
+
+# Получится ли одновременно передать команде файл на stdin и вывести ее stdout в другой файл? Приведите работающий пример.
+
+#vagrant@vagrant:~$ cat 11.file
+#insert to 14.file
+#vagrant@vagrant:~$ cat 14.file
+#cat: 14.file: No such file or directory
+#vagrant@vagrant:~$ less <11.file >14.file
+#vagrant@vagrant:~$ cat 14.file
+#insert to 14.file
+
+
+
+
