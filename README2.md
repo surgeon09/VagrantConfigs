@@ -32,3 +32,14 @@
            │                  ├─{VBoxService}(900)
            │                  ├─{VBoxService}(901)
            │                  └─{VBoxService}(902)
+
+
+# Как будет выглядеть команда, которая перенаправит вывод stderr ls на другую сессию терминала?
+
+#vagrant@vagrant:~$ tty
+#/dev/pts/0
+#vagrant@vagrant:~$ ls -l 14.file 2>/dev/pts/1
+
+#vagrant@vagrant:~$ tty
+#/dev/pts/1
+#vagrant@vagrant:~$ ls: cannot access '14.file': No such file or directory
