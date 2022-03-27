@@ -109,3 +109,20 @@
 #vagrant@vagrant:~$ ssh -t localhost 'tty'
 #vagrant@localhost's password:
 #/dev/pts/3
+
+
+# Бывает, что есть необходимость переместить запущенный процесс из одной сессии в другую. Попробуйте сделать это, воспользовавшись reptyr. Например, так можно перенести в screen процесс, который вы запустили по ошибке в обычной SSH-сессии.
+#vagrant@vagrant:~$ tty
+#/dev/pts/0
+#vagrant@vagrant:~$ echo $$
+#2302
+
+#vagrant@vagrant:~$ tty
+#/dev/pts/1
+#vagrant@vagrant:~$ sudo reptyr 2302
+
+
+
+
+
+
