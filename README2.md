@@ -61,4 +61,9 @@
 #/dev/pts/0
 #vagrant@vagrant:~$ echo "Hello!" > /dev/tty1-7 (By default Ubuntu has 7 tty's.)
 
-
+#vagrant@vagrant:~$ ls -l /dev/std*
+#lrwxrwxrwx 1 root root 15 Mar 27 11:41 /dev/stderr -> /proc/self/fd/2
+#lrwxrwxrwx 1 root root 15 Mar 27 11:41 /dev/stdin -> /proc/self/fd/0
+#lrwxrwxrwx 1 root root 15 Mar 27 11:41 /dev/stdout -> /proc/self/fd/1
+#bash 5>&1 - созданный файловый дескриптор 5 получит поток stdout
+#echo netology > /proc/$$/fd/5 - выведет "netology" т.к. поток stout был перенаправлен на предыдущем шаге
