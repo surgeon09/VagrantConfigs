@@ -100,3 +100,12 @@
 #vagrant@vagrant:~$ grep sse /proc/cpuinfo
 #..sse4_2...
 
+
+# При открытии нового окна терминала и vagrant ssh создается новая сессия и выделяется pty. Это можно подтвердить командой tty, которая упоминалась в лекции 3.2. Однако: vagrant@netology1:~$ ssh localhost 'tty' - not a tty
+#vagrant@vagrant:~$ cat /sys/devices/virtual/tty/console/active
+#tty0 
+#нет локального tty
+#Несколько опций -t принудительно выделяют tty, даже если ssh не имеет локального tty. (man ssh)
+#vagrant@vagrant:~$ ssh -t localhost 'tty'
+#vagrant@localhost's password:
+#/dev/pts/3
