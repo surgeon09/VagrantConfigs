@@ -5,3 +5,19 @@
 #cd is a shell builtin - встроенная функция в оболочку
 #может работать по разному в зависимости от оболочки (Bourne shell, csh, tcsh, bash и в DOS)
 #если бы она была внешняя, то необходимо было бы дополнительно подключать свою оболочку для получения желаемого еффекта поведения (например: в сессии DOS (общепринятый «домашний каталог» отсутствует и зависит от конкретной реализации)), также cd даёт различный эффект в разных операционных системах, поэтому для удобства cd является встроенной функицей в каждую оболочку.
+
+# Какая альтернатива без pipe команде grep <some_string> <some_file> | wc -l? man grep поможет в ответе на этот вопрос. Ознакомьтесь с документом о других подобных некорректных вариантах использования pipe.
+#vagrant@vagrant:~$ cat  /var/log/syslog | grep error - чтение и поиск в нем ключевого слова error
+#vagrant@vagrant:~$ cat  /var/log/syslog | grep -i error - чтение и поиск в нем ключевого слова error невзирая на регистр
+#Можно файл передать утилите grep в качестве аргумента:
+#vagrant@vagrant:~$ grep -i error /var/log/syslog
+
+#Можно выполнять поиск по маске, по набору файлов:
+#vagrant@vagrant:~$ sudo grep -i error /var/log/*
+#grep: /var/log/journal: Is a directory - может выдавать ошибку что grep не может прочитать директорию 
+#vagrant@vagrant:~$ sudo grep -ir error /var/log/* - ключ -ir дает возможность заглянуть в каждую директорию и найти там, при этом ошибок что он не может прочитать директорию не будет
+#vagrant@vagrant:~$ sudo grep -ir error /var/log/* | grep RAS: - выведет все строки с ключевым словом RAS:
+#vagrant@vagrant:~$ sudo grep -ir error /var/log/* | grep RAS: | wc -l - выведет все строки с ключевым словом RAS: и подсчитает кол-во таких строк
+#vagrant@vagrant:~$ cat /var/log/syslog | grep -A 2 error - выведет 2 строки после найденного вхождения
+#vagrant@vagrant:~$ cat /var/log/syslog | grep -B 2 error - выведет 2 строки до найденного вхождения
+#vagrant@vagrant:~$ cat /var/log/syslog | grep -С 2 error - выведет 2 строки до и после найденного вхождения
