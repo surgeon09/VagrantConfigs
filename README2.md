@@ -55,6 +55,10 @@
 #vagrant@vagrant:~$ cat 14.file
 #insert to 14.file
 
+# Получится ли находясь в графическом режиме, вывести данные из PTY в какой-либо из эмуляторов TTY? Сможете ли вы наблюдать выводимые данные?
 
+#vagrant@vagrant:~$ tty
+#/dev/pts/0
+#vagrant@vagrant:~$ echo "Hello!" > /dev/tty1-7 (By default Ubuntu has 7 tty's.)
 
 
