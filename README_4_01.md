@@ -63,7 +63,22 @@ done
 
 ### Ваш скрипт:
 ```bash
-???
+arr_ip=(192.168.0.1 173.194.222.113 87.250.250.242)
+arr_index=(1 2 3 4 5)
+
+for n in ${arr_index[@]}
+do
+    for i in ${arr_ip[@]}
+    do
+      curl $i:80 > /dev/null 2>&1
+      if (($? == 0))
+          then
+              echo "$i 80 port available" >> ~/script/file.log
+          else
+              echo "$i 80 port deny" >> ~/script/file.log
+      fi
+    done
+done
 ```
 
 ## Обязательная задача 4
