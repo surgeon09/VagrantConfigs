@@ -86,7 +86,22 @@ done
 
 ### Ваш скрипт:
 ```bash
-???
+#!/usr/bin/env bash
+
+arr_ip=(192.168.0.1 173.194.222.113 87.250.250.242)
+
+while ((1 == 1))
+do
+    for i in ${arr_ip[@]}
+    do
+        curl $i:80 > /dev/null 2>&1
+        if (($? != 0))
+                then
+                    echo "$i 80 port deny" >> ~/script/file.log
+                    exit
+        fi
+    done
+done
 ```
 
 ## Дополнительное задание (со звездочкой*) - необязательно к выполнению
