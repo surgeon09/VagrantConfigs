@@ -7,7 +7,6 @@
 ## Установите Bitwarden плагин для браузера. Зарегестрируйтесь и сохраните несколько паролей.
 
 Скриншот:
-```
 ![1](https://github.com/surgeon09/VagrantConfigs/blob/master/Screenshots/1.png?raw=true)
-```
+
 
