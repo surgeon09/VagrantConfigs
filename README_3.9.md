@@ -136,6 +136,138 @@ ____
 
 
 
+***Создание самоподписного SSL сертификата***
+https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-20-04-1
+```
+vagrant@vagrant:/var/www$ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
+
+Generating a RSA private key
+.......................................+++++
+................................................................+++++
+writing new private key to '/etc/ssl/private/nginx-selfsigned.key'
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:RU
+State or Province Name (full name) [Some-State]:Moscow
+Locality Name (eg, city) []:Moscow
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:NoName
+Organizational Unit Name (eg, section) []:NoName
+Common Name (e.g. server FQDN or YOUR name) []:192.168.1.67
+Email Address []:admin@devops.local
+
+vagrant@vagrant:/var/www$ sudo openssl dhparam -out /etc/nginx/dhparam.pem 4096
+
+```
+
+```
+Generating DH parameters, 4096 bit long safe prime, generator 2
+This is going to take a long time
+....................................................................................................................................................................................................................................................................................................+.......................................................................................................................................+..........+................................................................................................................................................................................................................................................................+....................................................................................................................................................................................+......................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................+.................................................................................................................................................................................................................................................................................................................................+....................................................................................................................................................................................................................................................................................................+.............................................................................................................................................................................................................................................+.......................................................+.........................................................................................................................................................................................................................................................................................+...............................................................................................................
+
+```
+
+```
+vagrant@vagrant:/var/www$ cd /etc/ssl
+vagrant@vagrant:/etc/ssl$ ls
+certs  openssl.cnf  private
+```
+***vagrant@vagrant:/etc/ssl$ sudo nano /etc/nginx/snippets/self-signed.conf***
+```
+ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+```
+***vagrant@vagrant:/etc/ssl$ sudo nano /etc/nginx/snippets/ssl-params.conf***
+```
+ssl_protocols TLSv1.3;
+ssl_prefer_server_ciphers on;
+ssl_dhparam /etc/nginx/dhparam.pem; 
+ssl_ciphers EECDH+AESGCM:EDH+AESGCM;
+ssl_ecdh_curve secp384r1;
+ssl_session_timeout  10m;
+ssl_session_cache shared:SSL:10m;
+ssl_session_tickets off;
+ssl_stapling on;
+ssl_stapling_verify on;
+resolver 8.8.8.8 8.8.4.4 valid=300s;
+resolver_timeout 5s;
+# Disable strict transport security for now. You can uncomment the following
+# line if you understand the implications.
+#add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload";
+add_header X-Frame-Options DENY;
+add_header X-Content-Type-Options nosniff;
+add_header X-XSS-Protection "1; mode=block";
+```
+***vagrant@vagrant:/etc/ssl$ sudo cp /etc/nginx/sites-available/devops.local /etc/nginx/sites-available/devops.local.bak***
+
+```
+vagrant@vagrant:/etc/ssl$ sudo nano /etc/nginx/sites-available/devops.local
+
+server {
+        listen 443 ssl;
+        listen [::]:443 ssl;
+        listen 192.168.1.67 ssl;
+        include snippets/self-signed.conf;
+        include snippets/ssl-params.conf;
+
+
+        root /var/www/devops.local/html;
+        index index.html index.htm index.nginx-debian.html;
+
+
+        server_name devops.local www.devops.local;
+
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}
+
+
+server {
+    listen 80;
+    listen [::]:80;
+
+
+    server_name devops.local www.devops.local;
+
+
+    return 301 https://$server_name$request_uri;
+}
+
+```
+***vagrant@vagrant:/etc/ssl$ sudo ufw status***
+```
+Status: active
+
+
+To                         Action      From
+--                         ------      ----
+Nginx HTTPS                ALLOW       Anywhere
+22/tcp                     ALLOW       Anywhere
+Nginx Full                 ALLOW       Anywhere
+Nginx HTTPS (v6)           ALLOW       Anywhere (v6)
+22/tcp (v6)                ALLOW       Anywhere (v6)
+Nginx Full (v6)            ALLOW       Anywhere (v6)
+vagrant@vagrant:/etc/ssl$ sudo nginx -t
+nginx: [warn] "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/ssl/certs/nginx-selfsigned.crt"
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successfu
+sudo systemctl restart nginx
+```
+#### Скриншот:
+____
+![4](https://github.com/surgeon09/VagrantConfigs/blob/master/Screenshots/4.png?raw=true)
+
+
+
+
+
 
 
 
