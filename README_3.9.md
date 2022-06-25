@@ -121,7 +121,18 @@ server {
         }
 }
 ```
-
+```
+sudo ln -s /etc/nginx/sites-available/devops /etc/nginx/sites-enabled/
+sudo nano /etc/nginx/nginx.conf
+server_names_hash_bucket_size 64;// удалал #
+vagrant@vagrant:/etc/nginx/sites-enabled$ sudo nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+sudo systemctl restart nginx
+```
+#### Скриншот:
+____
+![3](https://github.com/surgeon09/VagrantConfigs/blob/master/Screenshots/1.png?raw=true)
 
 
 
