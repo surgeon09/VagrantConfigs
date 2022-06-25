@@ -75,11 +75,12 @@ Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.4.0-91-generic x86_64)
   System load:  0.0                Users logged in:         0
   Usage of /:   13.0% of 30.88GB   IPv4 address for dummy0: 10.2.2.2
   Memory usage: 15%                IPv4 address for eth0:   10.0.2.15
-  Swap usage:   0%                 IPv4 address for eth1:   ***192.168.1.67***
+  Swap usage:   0%                 IPv4 address for eth1:   192.168.1.67
 
 ```
-    + http://192.168.1.67
-    + Получил начальную страницу Nginx по умолчанию
+**Получили начальную страницу Nginx по умолчанию** http://192.168.1.67
+
+
 
 
 
