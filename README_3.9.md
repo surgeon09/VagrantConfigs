@@ -132,7 +132,7 @@ sudo systemctl restart nginx
 ```
 #### Скриншот:
 ____
-![3](https://github.com/surgeon09/VagrantConfigs/blob/master/Screenshots/1.png?raw=true)
+![3](https://github.com/surgeon09/VagrantConfigs/blob/master/Screenshots/3.png?raw=true)
 
 
 
