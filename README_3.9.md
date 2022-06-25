@@ -332,7 +332,141 @@ ____
 
 ```
 
+## 5. Установите на Ubuntu ssh сервер, сгенерируйте новый приватный ключ. Скопируйте свой публичный ключ на другой сервер. Подключитесь к серверу по SSH-ключу.
+```
+vagrant@vagrant:/home$ sudo apt install openssh-server
+vagrant@vagrant:/home$ sudo systemctl start sshd.service
+vagrant@vagrant:/home$  sudo systemctl disable sshd
+Removed /etc/systemd/system/sshd.service.
+Removed /etc/systemd/system/multi-user.target.wants/ssh.service.
+vagrant@vagrant:/home$ sudo systemctl enable sshd
+Failed to enable unit: Unit file sshd.service does not exist.
+vagrant@vagrant:/home$ sudo systemctl enable ssh
+Synchronizing state of ssh.service with SysV service script with /lib/systemd/systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install enable ssh
+Created symlink /etc/systemd/system/sshd.service → /lib/systemd/system/ssh.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/ssh.service → /lib/systemd/system/ssh.service.
+vagrant@vagrant:~/.ssh$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/vagrant/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/vagrant/.ssh/id_rsa
+Your public key has been saved in /home/vagrant/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:z/wyYPyIVTboKtdU5H3cRfCG3SdbAHmQw58PO2oopnw vagrant@vagrant
+The key's randomart image is:
++---[RSA 3072]----+
+|           .o=oo.|
+|          . = .=o|
+|         + . =ooO|
+|        . * . *=o|
+|       oS+ . ..+ |
+|        B+    o .|
+|       B ++. . . |
+|    ..+ E =.o    |
+|     oo+ . +.    |
++----[SHA256]-----+
+vagrant@vagrant:~/.ssh$ ls
+authorized_keys  id_rsa  id_rsa.pub
+vagrant@vagrant:~/.ssh$ ssh-copy-id vagrant@192.168.1.67
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/vagrant/.ssh/id_rsa.pub"
+The authenticity of host '192.168.1.67 (192.168.1.67)' can't be established.
+ECDSA key fingerprint is SHA256:RztZ38lZsUpiN3mQrXHa6qtsUgsttBXWJibL2nAiwdQ.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? y
+Please type 'yes', 'no' or the fingerprint: no
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+The authenticity of host '192.168.1.67 (192.168.1.67)' can't be established.
+ECDSA key fingerprint is SHA256:RztZ38lZsUpiN3mQrXHa6qtsUgsttBXWJibL2nAiwdQ.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+vagrant@192.168.1.67's password:
 
+
+Number of key(s) added: 1
+
+
+Now try logging into the machine, with:   "ssh 'vagrant@192.168.1.67'"
+and check to make sure that only the key(s) you wanted were added.
+
+```
+***vagrant@vagrant:~$ ssh vagrant@192.168.1.67***
+```
+Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.4.0-91-generic x86_64)
+
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+
+  System information as of Mon 13 Jun 2022 05:08:45 AM UTC
+
+
+  System load:  0.0                Users logged in:         1
+  Usage of /:   13.5% of 30.88GB   IPv4 address for dummy0: 10.2.2.2
+  Memory usage: 14%                IPv4 address for eth0:   10.0.2.15
+  Swap usage:   0%                 IPv4 address for eth1:   192.168.1.67
+  Processes:    151
+
+
+
+
+This system is built by the Bento project by Chef Software
+More information can be found at https://github.com/chef/bento
+Last login: Mon Jun 13 05:08:30 2022 from 192.168.1.124
+```
+**ssh-rsa**
+```
+AAAAB3NzaC1yc2EAAAADAQABAAABAQC1mZiw9d1+trbfBR1GBIzTkMwez50BiJMnPMlCez2VZZr1NIIMm9poYJbhtCVyFK6DglEf2cd4AC2TLJyw8fG6C0zD9XZpKKBasFnPb/xsq0jmmatvgaR+HVLFu6vP7H+vxZOXKlQEUbwDIOiSPBoDfb+azvg3CM9ljtKa5+lRtNKmnC3v+2ZZWr1KauspYC/JlT1BvCHlPWP3MipzEt0Sp6GwmiF7qlvEmpD5iRdL022mS8CCxSXo3N9SVzk4COXipastwXnH40ltLLVbxIiB9YkgGkW1DBphp/E8k59/q0q0Ta73D8FwXgfNC3UNLzv5iY5Dl9JmqZiYw8m36c5B vagrant
+```
+**ssh-rsa**
+```
+AAAAB3NzaC1yc2EAAAADAQABAAABgQDAoG13yXUyxet3DOh7vnHuTHkf/PsQTJKyg3knAMnMKC3GWmzjC8jzeEITO7vltRpBz4ybgoctrIi9k/IzprZSdmwCRw+WahYSHBVOj5kbfc9FYhApNzSW8hB58bs5vv+fa9hyNeaXPVD93Wt/5GiQe2tsrPovu2Xe9JsDW+wFFwrQDr+x2YIzolUdx7N8dinhZjhPPywA/ILs2QzH57NPoXOcruwBErRpar9P66lJp/V84H+PUBdr4AYikXMP3t/TJIlu4oo2UrIdkJdu0nslmKzNXtDigfVXrAH6ZXxsYM6iJBAinHlXfbYjh6VX1gvsVK7mUqP/IbKsilHv7m+eLouM33GEHWi4hoSObTQNa0U+n7kN7zm4LAg49dg9JZmkACCbOu92shsM9ohRof4K2WdrfozKLq6+kQRH7SjelQEeEwdp55UCpCj1AAkeYUwWgOLVD1qQok7RSaG5MNTkE/jN49oz3tIM8czLD6MWIrEUwaXqClctdTFpG7YPP9E= vagrant@vagrant
+```
+
+## 6. Переименуйте файлы ключей из задания 5. Настройте файл конфигурации SSH клиента, так чтобы вход на удаленный сервер осуществлялся по имени сервера.
+**vagrant@vagrant:~/.ssh$ vim config**
+```
+Host netology
+HostName 192.168.1.67
+
+```
+**vagrant@vagrant:~/.ssh$ ssh netology**
+```
+Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.4.0-91-generic x86_64)
+
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+
+  System information as of Mon 13 Jun 2022 05:29:15 AM UTC
+
+
+  System load:  0.03               Users logged in:         1
+  Usage of /:   13.5% of 30.88GB   IPv4 address for dummy0: 10.2.2.2
+  Memory usage: 14%                IPv4 address for eth0:   10.0.2.15
+  Swap usage:   0%                 IPv4 address for eth1:   192.168.1.67
+  Processes:    157
+
+
+
+
+This system is built by the Bento project by Chef Software
+More information can be found at https://github.com/chef/bento
+Last login: Mon Jun 13 05:25:01 2022 from 192.168.1.67
+```
+
+## 7. Соберите дамп трафика утилитой tcpdump в формате pcap, 100 пакетов. Откройте файл pcap в Wireshark
+**vagrant@vagrant:~$ sudo tcpdump -w 0001.pcap -c 100 -i eth0**
+```
+scp vagrant@192.168.1.67:0001.pcap /Users/bogov/Desktop/devops
+```
+#### Скриншот:
+____
+![5](https://github.com/surgeon09/VagrantConfigs/blob/master/Screenshots/5.png?raw=true)
 
 
 
