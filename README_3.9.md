@@ -28,3 +28,32 @@ sudo apt update
 sudo apt install nginx
 
 ```
+
++ Шаг 2 — Настройка брандмауэра
+```
+sudo ufw app list
+sudo ufw allow 'Nginx HTTP'
+```
+
++ Шаг 3 — Проверка веб-сервера
+```
+systemctl status nginx
+vagrant@vagrant:/etc/nginx/sites-enabled$ systemctl status nginx
+● nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sun 2022-06-12 10:18:38 UTC; 46min ago
+       Docs: man:nginx(8)
+    Process: 39496 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+    Process: 39500 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+    Process: 39517 ExecReload=/usr/sbin/nginx -g daemon on; master_process on; -s reload (code=exited, status=0/SUCCESS)
+   Main PID: 39507 (nginx)
+      Tasks: 5 (limit: 2278)
+     Memory: 5.7M
+     CGroup: /system.slice/nginx.service
+             ├─39507 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
+             ├─39518 nginx: worker process
+             ├─39519 nginx: worker process
+             ├─39520 nginx: worker process
+             └─39521 nginx: worker process
+
+```
