@@ -80,7 +80,44 @@ Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.4.0-91-generic x86_64)
 ```
 **Получили начальную страницу Nginx по умолчанию** http://192.168.1.67
 
++ Шаг 5 — Настройка блоков сервера
+```
+sudo mkdir -p /var/www/devops/html
+sudo chown -R $USER:$USER /var/www/devops/html
+sudo chmod -R 755 /var/www/devops
+nano /var/www/devops/html/index.htm
+```
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DevOps</title>
+</head>
+<body>
+        DevOps - ИБ
+</body>
+</html>
+sudo nano /etc/nginx/sites-available/devops
+server {
+        listen 80;
+        listen [::]:80;
+        listen 192.168.1.67;
 
+
+        root /var/www/devops/html;
+        index index.html index.htm index.nginx-debian.html;
+
+
+        server_name devops www.devops;
+
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}
+```
 
 
 
