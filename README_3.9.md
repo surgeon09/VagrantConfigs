@@ -265,7 +265,72 @@ ____
 ![4](https://github.com/surgeon09/VagrantConfigs/blob/master/Screenshots/4.png?raw=true)
 
 
+## 4. Проверьте на TLS уязвимости произвольный сайт в интернете (кроме сайтов МВД, ФСБ, МинОбр, НацБанк, РосКосмос, РосАтом, РосНАНО и любых госкомпаний, объектов КИИ, ВПК ... и тому подобное)
+***vagrant@vagrant:/etc/ssl/testssl.sh$ ./testssl.sh -U --sneaky https://192.168.1.67***
 
+```
+###########################################################
+    testssl.sh       3.1dev from https://testssl.sh/dev/
+    (13298ff 2022-06-01 09:47:12)
+
+
+      This program is free software. Distribution and
+             modification under GPLv2 permitted.
+      USAGE w/o ANY WARRANTY. USE IT AT YOUR OWN RISK!
+
+
+       Please file bugs @ https://testssl.sh/bugs/
+
+
+###########################################################
+
+
+ Using "OpenSSL 1.0.2-chacha (1.0.2k-dev)" [~183 ciphers]
+ on vagrant:./bin/openssl.Linux.x86_64
+ (built: "Jan 18 17:12:17 2019", platform: "linux-x86_64")
+
+
+
+
+ Start 2022-06-13 04:49:23        -->> 192.168.1.67:443 (192.168.1.67) <<--
+
+
+ rDNS (192.168.1.67):    devops.local. www.devops.local.
+ 192.168.1.67:443 appears to support TLS 1.3 ONLY. You better use --openssl=<path_to_openssl_supporting_TLS_1.3>
+ Type "yes" to proceed and accept all scan problems --> yes
+ Service detected:       HTTP
+
+
+
+
+ Testing vulnerabilities
+
+
+ Heartbleed (CVE-2014-0160)                not vulnerable (OK), no heartbeat extension
+ CCS (CVE-2014-0224)                       not vulnerable (OK)
+ Ticketbleed (CVE-2016-9244), experiment.  not vulnerable (OK), no session ticket extension
+ ROBOT                                     Server does not support any cipher suites that use RSA key transport
+ Secure Renegotiation (RFC 5746)           not vulnerable (OK)
+ Secure Client-Initiated Renegotiation     not vulnerable (OK)
+ CRIME, TLS (CVE-2012-4929)                not vulnerable (OK)
+ BREACH (CVE-2013-3587)                    First request failed (HTTP header request stalled and was terminated) POODLE, SSL (CVE-2014-3566)               not vulnerable (OK), no SSLv3 support
+ TLS_FALLBACK_SCSV (RFC 7507)              No fallback possible (OK), no protocol below TLS 1.2 offered
+ SWEET32 (CVE-2016-2183, CVE-2016-6329)    not vulnerable (OK)
+ FREAK (CVE-2015-0204)                     not vulnerable (OK)
+ DROWN (CVE-2016-0800, CVE-2016-0703)      not vulnerable on this host and port (OK)
+                                           no RSA certificate, thus certificate can't be used with SSLv2 elsewhere
+ LOGJAM (CVE-2015-4000), experimental      not vulnerable (OK): no DH EXPORT ciphers, no DH key detected with <= TLS 1.2
+ BEAST (CVE-2011-3389)                     not vulnerable (OK), no SSL3 or TLS1
+ LUCKY13 (CVE-2013-0169), experimental     not vulnerable (OK)
+ Winshock (CVE-2014-6321), experimental    not vulnerable (OK)
+ RC4 (CVE-2013-2566, CVE-2015-2808)        not vulnerable (OK)
+
+
+
+
+ Done 2022-06-13 04:49:44 [  23s] -->> 192.168.1.67:443 (192.168.1.67) <<--
+
+```
 
 
 
