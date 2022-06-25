@@ -20,7 +20,7 @@ ____
 ## 3. Установите apache2, сгенерируйте самоподписанный сертификат, настройте тестовый сайт для работы по HTTPS (использовал Nginx)
 
 **Установка Nginx в Ubuntu 20.04**
-[https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04-ru]
+[https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04-ru](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04-ru)
 
 + Шаг 1 — Установка Nginx
 ```
