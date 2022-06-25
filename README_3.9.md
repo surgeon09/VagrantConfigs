@@ -99,6 +99,9 @@ nano /var/www/devops/html/index.htm
         DevOps - ИБ
 </body>
 </html>
+```
+
+```
 sudo nano /etc/nginx/sites-available/devops
 server {
         listen 80;
