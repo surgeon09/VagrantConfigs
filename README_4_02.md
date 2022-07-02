@@ -43,12 +43,20 @@ for result in result_os.split('\n'):
 
 ### Ваш скрипт:
 ```python
-???
+#!/usr/bin/env python3
+import os
+bash_command = ["cd ~/Documents/DevOps/VagrantConfigs", "git status"]
+result_os = os.popen(' && '.join(bash_command)).read()
+for result in result_os.split('\n'):
+    if result.find('изменено') != -1:
+        prepare_result = result.replace('\tизменено:   ', '')
+        print(prepare_result)
 ```
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-???
+bogov@MacBook-Pro-Arkadij-Bogov VagrantConfigs % /usr/bin/python3 /Users/bogov/Documents/DevOps/VagrantConfigs/2.py
+   README_4_02.md
 ```
 
 ## Обязательная задача 3
@@ -56,12 +64,23 @@ for result in result_os.split('\n'):
 
 ### Ваш скрипт:
 ```python
-???
+#!/usr/bin/env python3
+import os, sys
+
+param = sys.argv[1]
+bash_command = [f'cd {param}', "git status"]
+result_os = os.popen(' && '.join(bash_command)).read()
+
+for result in result_os.split('\n'):
+    if result.find('изменено') != -1:
+        prepare_result = result.replace('\tизменено:   ', '')
+        print(f'{param}/{prepare_result}')
 ```
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-???
+bogov@MacBook-Pro-Arkadij-Bogov VagrantConfigs % /usr/bin/python3 /Users/bogov/Documents/DevOps/VagrantConfigs/3.py /Users/bogov/Documents/DevOps/VagrantConfigs 
+/Users/bogov/Documents/DevOps/VagrantConfigs/   README_4_02.md
 ```
 
 ## Обязательная задача 4
@@ -69,12 +88,37 @@ for result in result_os.split('\n'):
 
 ### Ваш скрипт:
 ```python
-???
+##!/usr/bin/env python3
+
+import socket as s
+import time as t
+import datetime as dt
+
+i = 1
+wait = 2
+srv = {'drive.google.com':'0.0.0.0', 'mail.google.com':'0.0.0.0', 'google.com':'0.0.0.0'}
+init=0
+
+while 1==1 :
+  for host in srv:
+    ip = s.gethostbyname(host)
+    if ip != srv[host]:
+      if i==1 and init !=1:
+        print(str(dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")) +' [ERROR] ' + str(host) +' IP mistmatch: '+srv[host]+' '+ip)
+      srv[host]=ip
+
+  i+=1 
+  if i >= 50 : 
+    break
+  t.sleep(wait)
 ```
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-???
+bogov@MacBook-Pro-Arkadij-Bogov VagrantConfigs % /usr/bin/python3 /Users/bogov/Documents/DevOps/VagrantConfigs/4.py                                              
+2022-07-02 21:17:02 [ERROR] drive.google.com IP mistmatch: 0.0.0.0 173.194.220.194
+2022-07-02 21:17:02 [ERROR] mail.google.com IP mistmatch: 0.0.0.0 142.250.74.101
+2022-07-02 21:17:02 [ERROR] google.com IP mistmatch: 0.0.0.0 142.250.74.142
 ```
 
 ## Дополнительное задание (со звездочкой*) - необязательно к выполнению
