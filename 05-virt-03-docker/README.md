@@ -185,6 +185,84 @@ Node.js - по сути окружение для javascript для постро
 - Добавьте еще один файл в папку ```/data``` на хостовой машине;
 - Подключитесь во второй контейнер и отобразите листинг и содержание файлов в ```/data``` контейнера.
 
+#### Контейнер из образа ***centos***
+```
+vagrant@server1:/$ docker run -t -d -v /data:/data centos
+ac28bb7272d6649ced1462c067ddd942d20dd8f4736d03ae31c4913f68653614
+```
+
+#### Контейнер из образа ***debian***
+```
+vagrant@server1:/$ docker run -t -v /data:/data -d debian
+5283420cc786e87cecc61eb8aa4359249411c23f67f7aca86d0b17941b794c45
+```
+
+#### Смотрим ID контейнеров чтобы провалиться
+```
+vagrant@server1:/$ docker ps
+CONTAINER ID   IMAGE     COMMAND       CREATED              STATUS              PORTS     NAMES
+5283420cc786   debian    "bash"        4 seconds ago        Up 3 seconds                  jolly_kapitsa
+ac28bb7272d6   centos    "/bin/bash"   About a minute ago   Up About a minute             eloquent_ellis
+```
+
+#### Внутри контейнера с centos создаем фокусную папку и файл
+```
+vagrant@server1:/$ docker exec -it ac28bb7272d6 bash
+[root@ac28bb7272d6 /]# ls -lah /
+total 60K
+drwxr-xr-x   1 root root 4.0K Aug 18 18:08 .
+drwxr-xr-x   1 root root 4.0K Aug 18 18:08 ..
+-rwxr-xr-x   1 root root    0 Aug 18 18:08 .dockerenv
+lrwxrwxrwx   1 root root    7 Nov  3  2020 bin -> usr/bin
+drwxr-xr-x   2 root root 4.0K Aug 18 17:53 data
+drwxr-xr-x   5 root root  360 Aug 18 18:08 dev
+drwxr-xr-x   1 root root 4.0K Aug 18 18:08 etc
+drwxr-xr-x   2 root root 4.0K Nov  3  2020 home
+lrwxrwxrwx   1 root root    7 Nov  3  2020 lib -> usr/lib
+lrwxrwxrwx   1 root root    9 Nov  3  2020 lib64 -> usr/lib64
+drwx------   2 root root 4.0K Sep 15  2021 lost+found
+drwxr-xr-x   2 root root 4.0K Nov  3  2020 media
+drwxr-xr-x   2 root root 4.0K Nov  3  2020 mnt
+drwxr-xr-x   2 root root 4.0K Nov  3  2020 opt
+dr-xr-xr-x 168 root root    0 Aug 18 18:08 proc
+dr-xr-x---   2 root root 4.0K Sep 15  2021 root
+drwxr-xr-x  11 root root 4.0K Sep 15  2021 run
+lrwxrwxrwx   1 root root    8 Nov  3  2020 sbin -> usr/sbin
+drwxr-xr-x   2 root root 4.0K Nov  3  2020 srv
+dr-xr-xr-x  13 root root    0 Aug 18 18:08 sys
+drwxrwxrwt   7 root root 4.0K Sep 15  2021 tmp
+drwxr-xr-x  12 root root 4.0K Sep 15  2021 usr
+drwxr-xr-x  20 root root 4.0K Sep 15  2021 var
+[root@ac28bb7272d6 /]# echo '' > /data/centos-file-1
+[root@ac28bb7272d6 /]# ls /data
+centos-file-1
+[root@ac28bb7272d6 /]# exit
+exit
+```
+
+#### На хостовой машине создаем фокусную папку и файл
+```
+vagrant@server1:/$ sudo su
+root@server1:/# echo '' > /data/host-file-2
+root@server1:/# ls /data
+centos-file-1  host-file-2
+root@server1:/# exit
+exit
+```
+
+#### Листинг файлов в директории из контейнера debian
+```
+vagrant@server1:/$ docker exec -it 5283420cc786 bash
+root@5283420cc786:/# ls -lah /data
+total 16K
+drwxr-xr-x 2 root root 4.0K Aug 18 17:53 .
+drwxr-xr-x 1 root root 4.0K Aug 18 18:10 ..
+-rw-r--r-- 1 root root    1 Aug 18 18:11 centos-file-1
+-rw-r--r-- 1 root root    1 Aug 18 18:12 host-file-2
+root@5283420cc786:/# exit
+exit
+```
+
 ## Задача 4 (*)
 
 Воспроизвести практическую часть лекции самостоятельно.
