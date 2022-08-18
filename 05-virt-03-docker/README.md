@@ -774,6 +774,8 @@ centos            latest          5d0da3dc9764   11 months ago   231MB
 
 ```
 
+#### https://hub.docker.com/repository/docker/aabogov/ansible
+
 ---
 
 ### Как cдавать задание
