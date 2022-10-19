@@ -29,14 +29,7 @@
 Для получения зачета, вам необходимо предоставить:
 - Скриншот страницы, как на слайде из презентации (слайд 37).
 
-```
-vagrant@server1:~/VagrantConfigs/05-virt-04-docker-compose/src/packer$ yc compute image list
-+----------------------+---------------+--------+----------------------+--------+
-|          ID          |     NAME      | FAMILY |     PRODUCT IDS      | STATUS |
-+----------------------+---------------+--------+----------------------+--------+
-| fd8hp684airefrueno75 | centos-7-base | centos | f2euv1kekdgvc0jrpaet | READY  |
-+----------------------+---------------+--------+----------------------+--------+
-```
+![1](https://github.com/surgeon09/VagrantConfigs/blob/master/05-virt-04-docker-compose/images/37.png?raw=true)
 
 ## Задача 2
 
