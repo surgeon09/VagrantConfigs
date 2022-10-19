@@ -29,7 +29,9 @@
 Для получения зачета, вам необходимо предоставить:
 - Скриншот страницы, как на слайде из презентации (слайд 37).
 
-![1](https://github.com/surgeon09/VagrantConfigs/blob/master/05-virt-04-docker-compose/images/37.png?raw=true)
+<p align="center">
+  <img width="1200" height="600" src="https://github.com/surgeon09/VagrantConfigs/blob/master/05-virt-04-docker-compose/images/37.png?raw=true">
+</p>
 
 ## Задача 2
 
@@ -38,7 +40,9 @@
 Для получения зачета, вам необходимо предоставить:
 - Скриншот страницы свойств созданной ВМ, как на примере ниже:
 
-![1](https://github.com/surgeon09/VagrantConfigs/blob/master/05-virt-04-docker-compose/images/vm.png?raw=true)
+<p align="center">
+  <img width="1200" height="600" src="https://github.com/surgeon09/VagrantConfigs/blob/master/05-virt-04-docker-compose/images/vm.png?raw=true">
+</p>
 
 ## Задача 3
 
@@ -47,7 +51,7 @@
 Для получения зачета, вам необходимо предоставить:
 - Скриншот работающего веб-интерфейса Grafana с текущими метриками, как на примере ниже
 <p align="center">
-  <img width="1200" height="600" src="./assets/yc_02.png">
+  <img width="1200" height="600" src="https://github.com/surgeon09/VagrantConfigs/blob/master/05-virt-04-docker-compose/images/grafana.png?raw=true">
 </p>
 
 ## Задача 4 (*)
