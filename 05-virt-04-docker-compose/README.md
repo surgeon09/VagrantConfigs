@@ -38,9 +38,7 @@
 Для получения зачета, вам необходимо предоставить:
 - Скриншот страницы свойств созданной ВМ, как на примере ниже:
 
-<p align="center">
-  <img width="1200" height="600" src="./assets/yc_01.png">
-</p>
+![1](https://github.com/surgeon09/VagrantConfigs/blob/master/05-virt-04-docker-compose/images/vm.png?raw=true)
 
 ## Задача 3
 
